@@ -3,3 +3,6 @@ node_modules
 .env
 .env.local
 build/js/config.js
+.agents/
+.codex/
+

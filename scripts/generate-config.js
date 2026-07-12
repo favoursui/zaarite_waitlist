@@ -1,7 +1,3 @@
-// Reads SUPABASE_URL and SUPABASE_ANON_KEY from environment variables
-// and writes them into build/js/config.js — generated fresh on every build,
-// never committed to git.
-
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
