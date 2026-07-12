@@ -4,8 +4,9 @@
   "private": true,
   "description": "Gigly waitlist landing page — crypto payments, auto off-ramp to fiat",
   "scripts": {
-    "dev": "node scripts/generate-config.js && tailwindcss -i ./src/input.css -o ./build/css/style.css --watch",
-    "build": "node scripts/generate-config.js && tailwindcss -i ./src/input.css -o ./build/css/style.css --minify"
+    "dev": "node scripts/dev-server.js",
+    "dev:css": "tailwindcss -i ./src/input.css -o ./build/css/style.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./build/css/style.css --minify"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.13",

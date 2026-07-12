@@ -1,13 +1,4 @@
-const { url: SUPABASE_URL, anonKey: SUPABASE_ANON_KEY } = window.__SUPABASE_CONFIG__ || {};
 const initialSubmitHtml = document.getElementById('submit-btn')?.innerHTML;
-
-if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  console.error('Supabase config missing — did you run "npm run build" with SUPABASE_URL / SUPABASE_ANON_KEY set?');
-}
-
-const supabaseClient = SUPABASE_URL && SUPABASE_ANON_KEY
-  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-  : null;
 
 const form = document.getElementById('waitlist-form');
 const emailInput = document.getElementById('email');
@@ -25,16 +16,30 @@ function clearError() {
   errorMsg.classList.add('hidden');
 }
 
-async function loadCount() {
-  if (!supabaseClient) {
-    countEl.textContent = '—';
-    return;
+async function requestWaitlist(options = {}) {
+  const { headers, ...fetchOptions } = options;
+  const response = await fetch('/api/waitlist', {
+    ...fetchOptions,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(headers || {})
+    }
+  });
+  const payload = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    const error = new Error(payload.error || 'Request failed');
+    error.status = response.status;
+    throw error;
   }
 
+  return payload;
+}
+
+async function loadCount() {
   try {
-    const { data, error } = await supabaseClient.from('waitlist_count').select('total').single();
-    if (error || !data) throw error;
-    countEl.textContent = data.total.toLocaleString();
+    const data = await requestWaitlist();
+    countEl.textContent = Number(data.total || 0).toLocaleString();
   } catch (e) {
     countEl.textContent = '—';
   }
@@ -55,23 +60,10 @@ form.addEventListener('submit', async (e) => {
   submitBtn.textContent = 'Joining…';
 
   try {
-    if (!supabaseClient) {
-      throw new Error('Supabase config missing');
-    }
-
-    const { error } = await supabaseClient.from('waitlist_emails').insert({ email });
-
-    if (error) {
-      console.error('Supabase insert failed:', error);
-      if (error.code === '23505') {
-        showError('That email is already on the list.');
-      } else {
-        showError('Something went wrong. Try again.');
-      }
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = initialSubmitHtml || 'Join Waitlist';
-      return;
-    }
+    await requestWaitlist({
+      method: 'POST',
+      body: JSON.stringify({ email })
+    });
 
     successEmail.textContent = email;
     form.classList.add('hidden');
@@ -79,7 +71,13 @@ form.addEventListener('submit', async (e) => {
     loadCount();
   } catch (err) {
     console.error('Waitlist submit failed:', err);
-    showError('Network error. Try again.');
+    if (err.status === 409) {
+      showError('That email is already on the list.');
+    } else if (err.status === 400) {
+      showError('Enter a valid email address.');
+    } else {
+      showError('Something went wrong. Try again.');
+    }
     submitBtn.disabled = false;
     submitBtn.innerHTML = initialSubmitHtml || 'Join Waitlist';
   }
