@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-ink font-body antialiased;
+  }
+}
+
+@layer components {
+  .badge-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-1.5 text-sm text-slategray;
+  }
+  .icon-tile {
+    @apply w-11 h-11 rounded-xl bg-mint/10 flex items-center justify-center text-mint;
+  }
+  .feature-card {
+    @apply border border-black/10 rounded-2xl px-6 py-6 transition-shadow hover:shadow-md;
+  }
+  .btn-cta {
+    @apply w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-mint hover:bg-mint-dark text-white font-semibold rounded-full px-8 py-4 transition-colors;
+  }
+  .input-field {
+    @apply w-full rounded-full border border-black/10 px-5 py-4 text-[15px] outline-none focus:border-mint transition-colors placeholder:text-slategray/60;
+  }
+}

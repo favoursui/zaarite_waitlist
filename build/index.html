@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zaarite | waitlist</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="caret-red-300">
+
+  <div class="max-w-3xl mx-auto px-5 sm:px-8">
+
+    <!-- nav -->
+    <header class="flex items-center justify-between py-7">
+      <div class="flex items-center gap-2.5">
+        <span class="font-display font-bold text-lg">Zaarite</span>
+      </div>
+      <span class="font-mono text-xs tracking-[0.14em] uppercase text-slategray">Coming soon</span>
+    </header>
+
+    <!-- hero -->
+    <main class="pt-10 sm:pt-16 pb-16 text-center">
+      <div class="badge-pill mx-auto mb-8">
+        Early access is open
+      </div>
+
+      <h1 class="font-display font-extrabold text-[2.5rem] sm:text-6xl leading-[1.08] tracking-tight">
+        Get Paid in Crypto.<br/>
+        <span class="text-mint">Withdraw Local<br/>Currency.</span>
+      </h1>
+
+      <p class="mt-6 text-slategray text-[16px] sm:text-lg leading-relaxed max-w-xl mx-auto">
+        Join the Zaarite waitlist and be among the first to experience seamless crypto-to-bank payouts.
+      </p>
+
+      <form id="waitlist-form" class="mt-9 max-w-md mx-auto" novalidate>
+        <label for="email" class="sr-only">Email address</label>
+        <input
+          id="email"
+          type="email"
+          required
+          placeholder="Enter your email"
+          class="input-field"
+        />
+        <button type="submit" id="submit-btn" class="btn-cta mt-3.5">
+          Join Waitlist
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p id="error-msg" class="mt-3 text-sm hidden text-rose-600"></p>
+      </form>
+
+      <div id="success-box" class="hidden mt-9 max-w-md mx-auto border border-mint/25 bg-mint/5 rounded-2xl px-5 py-4 text-left">
+        <div class="flex items-start gap-3">
+          <div>
+            <p class="font-display font-semibold text-[15px]">🎉You're on the list</p>
+            <p class="text-[13px] text-slategray mt-0.5"><span id="success-email" class="font-mono text-mint"></span> is on the waitlist.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-6 font-mono text-xs text-slategray">
+        <span id="count"></span> people already on the waitlist
+      </p>
+    </main>
+
+    <!-- feature cards -->
+    <section class="grid sm:grid-cols-3 gap-5 pb-16">
+      <div class="feature-card">
+        <div class="icon-tile mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000""><path d="M360-120v-80H240v-80h80v-400h-80v-80h120v-80h80v80h80v-80h80v85q52 14 86 56.5t34 98.5q0 29-10 55.5T682-497q35 21 56.5 57t21.5 80q0 66-47 113t-113 47v80h-80v-80h-80v80h-80Zm40-400h160q33 0 56.5-23.5T640-600q0-33-23.5-56.5T560-680H400v160Zm0 240h200q33 0 56.5-23.5T680-360q0-33-23.5-56.5T600-440H400v160Z"/></svg>
+        </div>
+        <p class="font-display font-bold">Accept crypto</p>
+        <p class="text-sm text-slategray mt-1.5">Any major coin, any wallet</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-tile mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000""><path d="M480-40q-112 0-206-51T120-227v107H40v-240h240v80h-99q48 72 126.5 116T480-120q75 0 140.5-28.5t114-77q48.5-48.5 77-114T840-480h80q0 91-34.5 171T791-169q-60 60-140 94.5T480-40Zm-36-160v-52q-47-11-76.5-40.5T324-370l66-26q12 41 37.5 61.5T486-314q33 0 56.5-15.5T566-378q0-29-24.5-47T454-466q-59-21-86.5-50T340-592q0-41 28.5-74.5T446-710v-50h70v50q36 3 65.5 29t40.5 61l-64 26q-8-23-26-38.5T482-648q-35 0-53.5 15T410-592q0 26 23 41t83 35q72 26 96 61t24 77q0 29-10 51t-26.5 37.5Q583-274 561-264.5T514-250v50h-70ZM40-480q0-91 34.5-171T169-791q60-60 140-94.5T480-920q112 0 206 51t154 136v-107h80v240H680v-80h99q-48-72-126.5-116T480-840q-75 0-140.5 28.5t-114 77q-48.5 48.5-77 114T120-480H40Z"/></svg>
+        </div>
+        <p class="font-display font-bold">convert to fiat</p>
+        <p class="text-sm text-slategray mt-1.5">Instant fiat conversion</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-tile mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000""><path d="M240-170Q136-197 68-282T0-480q0-113 68-198t172-112v84q-71 24-115.5 86T80-480q0 78 44.5 140T240-254v84Zm320 10q-133 0-226.5-93.5T240-480q0-133 93.5-226.5T560-800q66 0 124 25t102 69l-56 56q-33-33-76.5-51.5T560-720q-100 0-170 70t-70 170q0 100 70 170t170 70q50 0 93.5-18.5T730-310l56 56q-44 44-102 69t-124 25Zm240-160-56-56 64-64H520v-80h288l-64-64 56-56 160 160-160 160Z"/></svg>
+        </div>
+        <p class="font-display font-bold">withdraw fiat</p>
+        <p class="text-sm text-slategray mt-1.5">Direct to your bank account</p>
+      </div>
+    </section>
+
+    <footer class="border-t border-black/10 py-8 text-center">
+      <p class="text-xs text-slategray">© 2026 Zaarite. All rights reserved.</p>
+    </footer>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./js/config.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>

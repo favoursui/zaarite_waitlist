@@ -1,0 +1,17 @@
+{
+  "name": "gigly-waitlist",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gigly waitlist landing page — crypto payments, auto off-ramp to fiat",
+  "scripts": {
+    "dev": "node scripts/generate-config.js && tailwindcss -i ./src/input.css -o ./build/css/style.css --watch",
+    "build": "node scripts/generate-config.js && tailwindcss -i ./src/input.css -o ./build/css/style.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13",
+    "dotenv": "^16.4.5"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4"
+  }
+}
